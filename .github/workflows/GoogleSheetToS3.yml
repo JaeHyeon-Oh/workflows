@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2 # checkout the repository content to github runner
         with:
           repository: JaeHyeon-Oh/GoogleSheetToMariaDB
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: ${{ env.DEVOPS_DIR }}
+          token: ${{ secrets.GITHUBTOKEN }}
+          
 
       - name: Setup python
         uses: actions/setup-python@v4
