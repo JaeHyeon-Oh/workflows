@@ -1,0 +1,43 @@
+name: GoogleSheetToS3 Workflow
+
+
+on: [push]
+#   schedule:
+#     - cron: '0 0 * * 1' # At 00:00 on Monday
+
+jobs:
+  GooglesheetToS3:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout GoogleSheetToMariaDB repo
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+        with:
+          repository: JaeHyeon-Oh/GoogleSheetToMariaDB
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ${{ env.DEVOPS_DIR }}
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' # install the python version needed
+          
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: execute GoogleToMySQL.py # run GoogleToMySQL.py
+        env:
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
+        run: python GoogleToMySQL.py
+          
+      - name: execute extract_mysql.py # run extract_mysql.py
+        env:
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
+        run: python extract_mysql.py
+        
+      - name: execute binlog_mysql.py # run binlog_mysql.py
+        env:
+          SOME_SECRET: ${{ secrets.SOME_SECRET }}
+        run: python binlog_mysql.py
