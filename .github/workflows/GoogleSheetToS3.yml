@@ -7,7 +7,7 @@ on: [push]
 
 jobs:
   GooglesheetToS3:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
 
       - name: Checkout GoogleSheetToMariaDB repo
@@ -28,16 +28,10 @@ jobs:
           pip install -r requirements.txt
           
       - name: execute GoogleToMySQL.py # run GoogleToMySQL.py
-        env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python GoogleToMySQL.py
           
       - name: execute extract_mysql.py # run extract_mysql.py
-        env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python extract_mysql.py
         
       - name: execute binlog_mysql.py # run binlog_mysql.py
-        env:
-          SOME_SECRET: ${{ secrets.SOME_SECRET }}
         run: python binlog_mysql.py
