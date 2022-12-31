@@ -1,37 +1,37 @@
-name: GoogleSheetToS3 Workflow
+# name: GoogleSheetToS3 Workflow
 
 
-on: 
-  schedule:
-    - cron: "0 5 * * *" # At 00:00 on Monday
+# on: 
+#   schedule:
+#     - cron: "0 5 * * *" # At 00:00 on Monday
 
-jobs:
-  GooglesheetToS3:
-    runs-on: ubuntu-20.04
-    steps:
+# jobs:
+#   GooglesheetToS3:
+#     runs-on: ubuntu-20.04
+#     steps:
 
-      - name: Checkout GoogleSheetToMariaDB repo
-        uses: actions/checkout@v2 # checkout the repository content to github runner
-        with:
-          repository: JaeHyeon-Oh/GoogleSheetToMariaDB
-          token: ${{ secrets.GITHUBTOKEN }}
+#       - name: Checkout GoogleSheetToMariaDB repo
+#         uses: actions/checkout@v2 # checkout the repository content to github runner
+#         with:
+#           repository: JaeHyeon-Oh/GoogleSheetToMariaDB
+#           token: ${{ secrets.GITHUBTOKEN }}
           
 
-      - name: Setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10' # install the python version needed
+#       - name: Setup python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.10' # install the python version needed
           
-      - name: install python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+#       - name: install python packages
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
           
-      - name: execute GoogleToMySQL.py # run GoogleToMySQL.py
-        run: python GoogleToMySQL.py
+#       - name: execute GoogleToMySQL.py # run GoogleToMySQL.py
+#         run: python GoogleToMySQL.py
           
-      - name: execute extract_mysql.py # run extract_mysql.py
-        run: python extract_mysql.py
+#       - name: execute extract_mysql.py # run extract_mysql.py
+#         run: python extract_mysql.py
         
-      - name: execute binlog_mysql.py # run binlog_mysql.py
-        run: python binlog_mysql.py
+#       - name: execute binlog_mysql.py # run binlog_mysql.py
+#         run: python binlog_mysql.py
